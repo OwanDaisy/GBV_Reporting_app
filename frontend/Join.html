@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SafeSpace - Join/Support Communities</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', 'Segoe UI', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e6f7ff 100%);
+            color: #333;
+            min-height: 100vh;
+            padding: 20px;
+            padding-bottom: 100px; /* Space for footer */
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        /* Header Styles */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            margin-bottom: 20px;
+        }
+        
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo-small {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, #4361ee 0%, #3a0ca3 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+        }
+        
+        .screen-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #2d3748;
+        }
+        
+        .user-account {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, #7209b7 0%, #560bad 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Search Bar */
+        .search-bar {
+            margin-bottom: 30px;
+        }
+        
+        .search-container {
+            display: flex;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .search-input {
+            flex: 1;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 50px 0 0 50px;
+            font-size: 1rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+        
+        .search-btn {
+            padding: 0 25px;
+            background: linear-gradient(to right, #4361ee, #3a0ca3);
+            color: white;
+            border: none;
+            border-radius: 0 50px 50px 0;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+        
+        /* Filter Buttons */
+        .filter-buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .filter-btn {
+            padding: 10px 20px;
+            background: white;
+            color: #4361ee;
+            border: 2px solid #4361ee;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .filter-btn.active, .filter-btn:hover {
+            background: #4361ee;
+            color: white;
+        }
+        
+        /* NGOs List */
+        .ngos-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .ngo-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .ngo-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .ngo-header {
+            padding: 20px;
+            background: linear-gradient(to right, #4361ee, #3a0ca3);
+            color: white;
+            position: relative;
+        }
+        
+        .ngo-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        .ngo-location {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        .ngo-content {
+            padding: 20px;
+        }
+        
+        .ngo-description {
+            font-size: 0.95rem;
+            color: #718096;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        .ngo-contact {
+            margin-bottom: 20px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+        
+        .contact-item i {
+            color: #4361ee;
+            width: 20px;
+        }
+        
+        .ngo-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 15px;
+        }
+        
+        .action-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .support-btn {
+            background: linear-gradient(to right, #4cc9f0, #4361ee);
+            color: white;
+        }
+        
+        .join-btn {
+            background: linear-gradient(to right, #f72585, #7209b7);
+            color: white;
+        }
+        
+        .action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 15px;
+            display: flex;
+            justify-content: space-around;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #718096;
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+        
+        .nav-item.active {
+            color: #4361ee;
+        }
+        
+        .nav-item i {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .ngos-list {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+                gap: 20px;
+            }
+            
+            .screen-title {
+                font-size: 1.5rem;
+            }
+            
+            .header {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+            
+            .logo-section {
+                justify-content: center;
+            }
+            
+            .ngo-actions {
+                flex-direction: column;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .ngos-list {
+                grid-template-columns: 1fr;
+            }
+            
+            .filter-buttons {
+                gap: 10px;
+            }
+            
+            .filter-btn {
+                padding: 8px 16px;
+                font-size: 0.8rem;
+            }
+            
+            .action-btn {
+                padding: 8px 16px;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <div class="header">
+            <div class="logo-section">
+                <div class="logo-small">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <div class="screen-title">Find/Support an Organization</div>
+            </div>
+            <div class="user-account" id="userAccount">
+                G
+            </div>
+        </div>
+        
+        <!-- Search Bar -->
+        <div class="search-bar">
+            <div class="search-container">
+                <input type="text" class="search-input" placeholder="Search NGOs...">
+                <button class="search-btn">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Filter Buttons -->
+        <div class="filter-buttons">
+            <button class="filter-btn active">All</button>
+            <button class="filter-btn">Yaoundé</button>
+            <button class="filter-btn">Douala</button>
+            <button class="filter-btn">Bamenda</button>
+            <button class="filter-btn">Buea</button>
+        </div>
+        
+        <!-- NGOs List -->
+        <div class="ngos-list">
+            <!-- NGO 1 -->
+            <div class="ngo-card">
+                <div class="ngo-header">
+                    <h3 class="ngo-name">Women for a Change, Cameroon</h3>
+                    <div class="ngo-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Bamenda, Northwest Region</span>
+                    </div>
+                </div>
+                <div class="ngo-content">
+                    <p class="ngo-description">A feminist organization working to empower young women and girls through education, advocacy, and support services for GBV survivors.</p>
+                    <div class="ngo-contact">
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>info@womenforachange-cm.org</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span>+237 677 889 900</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-globe"></i>
+                            <span>www.womenforachange-cm.org</span>
+                        </div>
+                    </div>
+                    <div class="ngo-actions">
+                        <button class="action-btn support-btn">
+                            <i class="fas fa-donate"></i> Support
+                        </button>
+                        <button class="action-btn join-btn">
+                            <i class="fas fa-user-plus"></i> Join
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- NGO 2 -->
+            <div class="ngo-card">
+                <div class="ngo-header">
+                    <h3 class="ngo-name">RELUFA - Anti-Corruption Coalition</h3>
+                    <div class="ngo-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Yaoundé, Centre Region</span>
+                    </div>
+                </div>
+                <div class="ngo-content">
+                    <p class="ngo-description">Fights against corruption and promotes transparency, with programs supporting women affected by economic violence and exploitation.</p>
+                    <div class="ngo-contact">
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>contact@relufa.org</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span>+237 222 231 456</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-globe"></i>
+                            <span>www.relufa.org</span>
+                        </div>
+                    </div>
+                    <div class="ngo-actions">
+                        <button class="action-btn support-btn">
+                            <i class="fas fa-donate"></i> Support
+                        </button>
+                        <button class="action-btn join-btn">
+                            <i class="fas fa-user-plus"></i> Join
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- NGO 3 -->
+            <div class="ngo-card">
+                <div class="ngo-header">
+                    <h3 class="ngo-name">CAMNAFAW - Cameroon National Association for Family Welfare</h3>
+                    <div class="ngo-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Douala, Littoral Region</span>
+                    </div>
+                </div>
+                <div class="ngo-content">
+                    <p class="ngo-description">Provides reproductive health services and works to prevent gender-based violence through education and community outreach programs.</p>
+                    <div class="ngo-contact">
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>admin@camnafaw.org</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span>+237 233 421 500</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-globe"></i>
+                            <span>www.camnafaw.org</span>
+                        </div>
+                    </div>
+                    <div class="ngo-actions">
+                        <button class="action-btn support-btn">
+                            <i class="fas fa-donate"></i> Support
+                        </button>
+                        <button class="action-btn join-btn">
+                            <i class="fas fa-user-plus"></i> Join
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- NGO 4 -->
+            <div class="ngo-card">
+                <div class="ngo-header">
+                    <h3 class="ngo-name">SWEET Foundation Cameroon</h3>
+                    <div class="ngo-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Buea, Southwest Region</span>
+                    </div>
+                </div>
+                <div class="ngo-content">
+                    <p class="ngo-description">Empowers women and girls through education, skills training, and support for GBV survivors with legal assistance and counseling.</p>
+                    <div class="ngo-contact">
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>sweetfoundation@yahoo.com</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span>+237 677 451 234</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-globe"></i>
+                            <span>www.sweetfoundationcameroon.org</span>
+                        </div>
+                    </div>
+                    <div class="ngo-actions">
+                        <button class="action-btn support-btn">
+                            <i class="fas fa-donate"></i> Support
+                        </button>
+                        <button class="action-btn join-btn">
+                            <i class="fas fa-user-plus"></i> Join
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- NGO 5 -->
+            <div class="ngo-card">
+                <div class="ngo-header">
+                    <h3 class="ngo-name">LUKMEF Cameroon</h3>
+                    <div class="ngo-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Buea, Southwest Region</span>
+                    </div>
+                </div>
+                <div class="ngo-content">
+                    <p class="ngo-description">Promotes peace, human rights, and development with special programs for women affected by conflict-related violence.</p>
+                    <div class="ngo-contact">
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>info@lukmef.org</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span>+237 233 322 645</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-globe"></i>
+                            <span>www.lukmef.org</span>
+                        </div>
+                    </div>
+                    <div class="ngo-actions">
+                        <button class="action-btn support-btn">
+                            <i class="fas fa-donate"></i> Support
+                        </button>
+                        <button class="action-btn join-btn">
+                            <i class="fas fa-user-plus"></i> Join
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- NGO 6 -->
+            <div class="ngo-card">
+                <div class="ngo-header">
+                    <h3 class="ngo-name">RENATA - National Network of Aunties</h3>
+                    <div class="ngo-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Yaoundé, Centre Region</span>
+                    </div>
+                </div>
+                <div class="ngo-content">
+                    <p class="ngo-description">A network of survivors who provide peer education and support to young girls and women affected by GBV across Cameroon.</p>
+                    <div class="ngo-contact">
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>renata.cameroon@gmail.com</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span>+237 222 231 789</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-globe"></i>
+                            <span>www.renatacameroon.org</span>
+                        </div>
+                    </div>
+                    <div class="ngo-actions">
+                        <button class="action-btn support-btn">
+                            <i class="fas fa-donate"></i> Support
+                        </button>
+                        <button class="action-btn join-btn">
+                            <i class="fas fa-user-plus"></i> Join
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Bottom Navigation -->
+    <div class="bottom-nav">
+        <div class="nav-item" onclick="navigateTo('HomeScreen.html')">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+        </div>
+        <div class="nav-item" onclick="navigateTo('Articles.html')">
+            <i class="fas fa-newspaper"></i>
+            <span>Articles</span>
+        </div>
+        <div class="nav-item" onclick="navigateTo('SurvivorStories.html')">
+            <i class="fas fa-book-open"></i>
+            <span>Stories</span>
+        </div>
+        <div class="nav-item" onclick="navigateTo('Statistics.html')">
+            <i class="fas fa-chart-bar"></i>
+            <span>Statistics</span>
+        </div>
+        <div class="nav-item active">
+            <i class="fas fa-hands-helping"></i>
+            <span>Join NGO</span>
+        </div>
+        <div class="nav-item" onclick="exitApp()">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>Exit</span>
+        </div>
+    </div>
+
+    <script>
+        // Set user initial based on whether they're a guest or logged in
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if user is logged in or guest (this would normally come from your auth system)
+            const urlParams = new URLSearchParams(window.location.search);
+            const userType = urlParams.get('user') || 'guest';
+            
+            if (userType === 'guest') {
+                document.getElementById('userAccount').textContent = 'G';
+            } else {
+                // For demonstration, using 'U' for user - in real app, use actual initials
+                document.getElementById('userAccount').textContent = 'U';
+            }
+            
+            // Set up filter buttons
+            setupFilterButtons();
+            
+            // Set up search functionality
+            setupSearch();
+            
+            // Set up action buttons
+            setupActionButtons();
+        });
+        
+        // Set up filter buttons
+        function setupFilterButtons() {
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const ngoCards = document.querySelectorAll('.ngo-card');
+
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // Remove active class from all buttons
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    // Add active class to clicked button
+                    this.classList.add('active');
+
+                    const filter = this.textContent.trim();
+                    ngoCards.forEach(card => {
+                        const location = card.querySelector('.ngo-location span').textContent.toLowerCase();
+                        if (filter === 'All') {
+                            card.style.display = '';
+                        } else if (location.includes(filter.toLowerCase())) {
+                            card.style.display = '';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        }
+        
+        // Set up search functionality
+        function setupSearch() {
+            const searchInput = document.querySelector('.search-input');
+            const searchBtn = document.querySelector('.search-btn');
+            
+            searchBtn.addEventListener('click', function() {
+                performSearch(searchInput.value);
+            });
+            
+            searchInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    performSearch(searchInput.value);
+                }
+            });
+        }
+        
+        function performSearch(query) {
+            if (query.trim() !== '') {
+                alert(`Searching for: ${query}`);
+                // In a real app, you would filter NGOs based on the search query
+            }
+        }
+        
+        // Set up action buttons
+        function setupActionButtons() {
+            const supportBtns = document.querySelectorAll('.support-btn');
+            const joinBtns = document.querySelectorAll('.join-btn');
+            
+            supportBtns.forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const ngoName = this.closest('.ngo-card').querySelector('.ngo-name').textContent;
+                    alert(`Supporting ${ngoName}. Opening donation form...`);
+                });
+            });
+            
+            joinBtns.forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const ngoName = this.closest('.ngo-card').querySelector('.ngo-name').textContent;
+                    alert(`Requesting to join ${ngoName}. Application form will open...`);
+                });
+            });
+        }
+        
+        // Function to navigate to different screens
+        function navigateTo(screen) {
+            window.location.href = screen;
+        }
+        
+        // Function to handle exit app
+        function exitApp() {
+            if(confirm('Are you sure you want to exit the app?')) {
+                alert('Exiting the app...');
+                // In a real app, this would close the app or navigate to a goodbye screen
+            }
+        }
+    </script>
+</body>
+</html>

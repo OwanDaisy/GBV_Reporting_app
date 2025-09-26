@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Healing Together - SafeSpace</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', 'Segoe UI', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f9f7ff 0%, #eef2f7 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(to right, #6A11CB 0%, #2575FC 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: white;
+            font-size: 1.2rem;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .story-title {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+        
+        .story-meta {
+            font-style: italic;
+            opacity: 0.9;
+        }
+        
+        .story-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+        }
+        
+        .story-content {
+            padding: 40px;
+        }
+        
+        .story-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 25px;
+        }
+        
+        .support-resources {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+            margin-top: 30px;
+        }
+        
+        .resources-title {
+            color: #6A11CB;
+            margin-bottom: 15px;
+        }
+        
+        .resources-list {
+            list-style-type: none;
+        }
+        
+        .resources-list li {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .story-title {
+                font-size: 1.8rem;
+            }
+            
+            .story-content {
+                padding: 25px;
+            }
+            
+            .story-image {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <a href="SurvivorStories.html" class="back-button">
+                <i class="fas fa-arrow-left"></i> Back to Stories
+            </a>
+            <h1 class="story-title">Healing Together</h1>
+            <p class="story-meta">Shared by Sarah, 36 • Survivor of intimate partner violence</p>
+        </div>
+        
+        <img src="https://images.unsplash.com/photo-1516585427167-9f4af9627e6c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80" alt="Support group image" class="story-image">
+        
+        <div class="story-content">
+            <p class="story-text">
+                After ten years in an abusive marriage, I felt completely alone. My partner had systematically isolated me from friends and family, and I believed his words that no one would want me if I left. The final straw came when my son asked me why daddy always made mommy cry.
+            </p>
+            
+            <p class="story-text">
+                With nowhere to go, I contacted a domestic violence hotline and was placed in a emergency shelter. Those first weeks were terrifying—I second-guessed my decision constantly and worried about providing for my children alone. But in the shelter, I met other women with stories just like mine.
+            </p>
+            
+            <p class="story-text">
+                Our weekly support group became my lifeline. For the first time, I wasn't being judged or told to "just leave." These women understood the complex dynamics of abuse—the trauma bonds, the financial control, the fear. We cried together, celebrated small victories together, and slowly began to heal together.
+            </p>
+            
+            <p class="story-text">
+                One woman in our group had been out of her abusive relationship for three years and was thriving. She became my inspiration—proof that healing was possible. She taught me that recovery isn't linear; some days you take two steps forward and one step back, but what matters is that you keep moving.
+            </p>
+            
+            <p class="story-text">
+                Today, I co-facilitate that same support group. I've seen countless women transform from broken and fearful to confident and empowered. My children are in therapy and learning healthy relationship skills, breaking the cycle of abuse for the next generation.
+            </p>
+            
+            <p class="story-text">
+                Community healing is powerful medicine. When we share our stories without shame, we take back our power. If you're feeling alone in your experience, I encourage you to seek out others who understand. There is incredible strength in shared healing.
+            </p>
+            
+            <div class="support-resources">
+                <h3 class="resources-title">Support Resources</h3>
+                <ul class="resources-list">
+                    <li><i class="fas fa-phone-alt"></i> National Domestic Violence Hotline: 1-800-799-SAFE (7233)</li>
+                    <li><i class="fas fa-globe"></i> DomesticShelters.org: Find local support groups</li>
+                    <li><i class="fas fa-hands-helping"></i> Community-based support: Ask local shelters about group therapy</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>If you or someone you know needs help, please reach out. You deserve support and safety.</p>
+        </div>
+    </div>
+</body>
+</html>

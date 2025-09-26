@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SafeSpace - Articles & Resources</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', 'Segoe UI', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e6f2ff 100%);
+            color: #333;
+            min-height: 100vh;
+            padding: 20px;
+            padding-bottom: 100px; /* Space for footer */
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        /* Header Styles */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            margin-bottom: 20px;
+        }
+        
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo-small {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, #4361ee 0%, #3a0ca3 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+        }
+        
+        .screen-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #2d3748;
+        }
+        
+        .user-account {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, #7209b7 0%, #560bad 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Search Bar */
+        .search-bar {
+            margin-bottom: 30px;
+        }
+        
+        .search-container {
+            display: flex;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .search-input {
+            flex: 1;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 50px 0 0 50px;
+            font-size: 1rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+        
+        .search-btn {
+            padding: 0 25px;
+            background: linear-gradient(to right, #4361ee, #3a0ca3);
+            color: white;
+            border: none;
+            border-radius: 0 50px 50px 0;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+        
+        /* Articles Grid */
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .article-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .article-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .article-image {
+            height: 160px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .article-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .article-card:hover .article-image img {
+            transform: scale(1.05);
+        }
+        
+        .article-category {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #4361ee;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .article-content {
+            padding: 20px;
+        }
+        
+        .article-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #2d3748;
+            line-height: 1.4;
+        }
+        
+        .article-excerpt {
+            font-size: 0.95rem;
+            color: #718096;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        .read-more {
+            color: #4361ee;
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        /* Filter Buttons */
+        .filter-buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .filter-btn {
+            padding: 10px 20px;
+            background: white;
+            color: #4361ee;
+            border: 2px solid #4361ee;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .filter-btn.active, .filter-btn:hover {
+            background: #4361ee;
+            color: white;
+        }
+        
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 15px;
+            display: flex;
+            justify-content: space-around;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #718096;
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+        
+        .nav-item.active {
+            color: #4361ee;
+        }
+        
+        .nav-item i {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .articles-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 20px;
+            }
+            
+            .screen-title {
+                font-size: 1.5rem;
+            }
+            
+            .header {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+            
+            .logo-section {
+                justify-content: center;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .articles-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .article-image {
+                height: 140px;
+            }
+            
+            .filter-buttons {
+                gap: 10px;
+            }
+            
+            .filter-btn {
+                padding: 8px 16px;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <div class="header">
+            <div class="logo-section">
+                <div class="logo-small">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <div class="screen-title">Articles, Blogs and Texts</div>
+            </div>
+            <div class="user-account" id="userAccount">
+                G
+            </div>
+        </div>
+        
+        <!-- Search Bar -->
+        <div class="search-bar">
+            <div class="search-container">
+                <input type="text" class="search-input" placeholder="Search articles...">
+                <button class="search-btn">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Filter Buttons -->
+        <div class="filter-buttons">
+            <button class="filter-btn active">All</button>
+            <button class="filter-btn">Education</button>
+            <button class="filter-btn">Support</button>
+            <button class="filter-btn">Legal</button>
+            <button class="filter-btn">Health</button>
+        </div>
+        
+        <!-- Articles Grid -->
+        <div class="articles-grid">
+            <!-- Article 1 -->
+            <div class="article-card" onclick="openArticle('https://www.unwomen.org/en/what-we-do/ending-violence-against-women')">
+                <div class="article-image">
+                    <img src="https://images.unsplash.com/photo-1584697964358-3e14ca57658b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80" alt="Article Image">
+                    <div class="article-category">Education</div>
+                </div>
+                <div class="article-content">
+                    <h3 class="article-title">Understanding Gender-Based Violence</h3>
+                    <p class="article-excerpt">Learn about the different forms of GBV, its impact on survivors, and how to recognize warning signs.</p>
+                    <div class="read-more">
+                        <span>Read Article</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Article 2 -->
+            <div class="article-card" onclick="openArticle('https://www.who.int/news-room/fact-sheets/detail/violence-against-women')">
+                <div class="article-image">
+                    <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80" alt="Article Image">
+                    <div class="article-category">Health</div>
+                </div>
+                <div class="article-content">
+                    <h3 class="article-title">Health Impacts of GBV</h3>
+                    <p class="article-excerpt">Understanding the physical and psychological health consequences of gender-based violence.</p>
+                    <div class="read-more">
+                        <span>Read Article</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Article 3 -->
+            <div class="article-card" onclick="openArticle('https://www.rainn.org/articles/understanding-consent')">
+                <div class="article-image">
+                    <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80" alt="Article Image">
+                    <div class="article-category">Education</div>
+                </div>
+                <div class="article-content">
+                    <h3 class="article-title">Consent: What It Really Means</h3>
+                    <p class="article-excerpt">A comprehensive guide to understanding consent in relationships and how to practice it.</p>
+                    <div class="read-more">
+                        <span>Read Article</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Article 4 -->
+            <div class="article-card" onclick="openArticle('https://www.thehotline.org/plan-for-safety/create-a-safety-plan/')">
+                <div class="article-image">
+                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80" alt="Article Image">
+                    <div class="article-category">Support</div>
+                </div>
+                <div class="article-content">
+                    <h3 class="article-title">Creating a Safety Plan</h3>
+                    <p class="article-excerpt">Step-by-step guide to creating a personalized safety plan for those experiencing abuse.</p>
+                    <div class="read-more">
+                        <span>Read Article</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Article 5 -->
+            <div class="article-card" onclick="openArticle('https://www.un.org/en/coronavirus/what-is-domestic-abuse')">
+                <div class="article-image">
+                    <img src="https://images.unsplash.com/photo-1519457431-44ccd64a579b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80" alt="Article Image">
+                    <div class="article-category">Education</div>
+                </div>
+                <div class="article-content">
+                    <h3 class="article-title">Domestic Abuse During COVID-19</h3>
+                    <p class="article-excerpt">How the pandemic has affected rates of domestic violence and resources for those in need.</p>
+                    <div class="read-more">
+                        <span>Read Article</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Article 6 -->
+            <div class="article-card" onclick="openArticle('https://www.legalservicesindia.com/article/2248/Laws-against-Domestic-Violence-in-India.html')">
+                <div class="article-image">
+                    <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80" alt="Article Image">
+                    <div class="article-category">Legal</div>
+                </div>
+                <div class="article-content">
+                    <h3 class="article-title">Legal Rights and Protections</h3>
+                    <p class="article-excerpt">Understanding your legal rights and the protections available against gender-based violence.</p>
+                    <div class="read-more">
+                        <span>Read Article</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Article 7 -->
+            <div class="article-card" onclick="openArticle('https://www.psychologytoday.com/us/blog/the-legacy-trauma/202009/helping-survivors-traumatic-grief')">
+                <div class="article-image">
+                    <img src="https://images.unsplash.com/photo-1597223557154-721c1cecc4b0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80" alt="Article Image">
+                    <div class="article-category">Support</div>
+                </div>
+                <div class="article-content">
+                    <h3 class="article-title">Healing from Trauma</h3>
+                    <p class="article-excerpt">Therapeutic approaches and self-care strategies for survivors of gender-based violence.</p>
+                    <div class="read-more">
+                        <span>Read Article</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Article 8 -->
+            <div class="article-card" onclick="openArticle('https://www.unfpa.org/resources/female-genital-mutilation-fgm-frequently-asked-questions')">
+                <div class="article-image">
+                    <img src="https://images.unsplash.com/photo-1519457425-658d4bf7b7eb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80" alt="Article Image">
+                    <div class="article-category">Health</div>
+                </div>
+                <div class="article-content">
+                    <h3 class="article-title">FGM: Facts and Prevention</h3>
+                    <p class="article-excerpt">Understanding female genital mutilation and global efforts to eliminate this harmful practice.</p>
+                    <div class="read-more">
+                        <span>Read Article</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Bottom Navigation -->
+    <div class="bottom-nav">
+        <div class="nav-item" onclick="navigateTo('HomeScreen.html')">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+        </div>
+        <div class="nav-item active">
+            <i class="fas fa-newspaper"></i>
+            <span>Articles</span>
+        </div>
+        <div class="nav-item" onclick="navigateTo('SurvivorStories.html')">
+            <i class="fas fa-book-open"></i>
+            <span>Stories</span>
+        </div>
+        <div class="nav-item" onclick="navigateTo('Statistics.html')">
+            <i class="fas fa-chart-bar"></i>
+            <span>Statistics</span>
+        </div>
+        <div class="nav-item" onclick="navigateTo('Join.html')">
+            <i class="fas fa-hands-helping"></i>
+            <span>Join NGO</span>
+        </div>
+        <div class="nav-item" onclick="navigateTo('WelcomeScreen.html')">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>Exit</span>
+        </div>
+    </div>
+
+    <script>
+        // Set user initial based on whether they're a guest or logged in
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if user is logged in or guest (this would normally come from your auth system)
+            const urlParams = new URLSearchParams(window.location.search);
+            const userType = urlParams.get('user') || 'guest';
+            
+            if (userType === 'guest') {
+                document.getElementById('userAccount').textContent = 'G';
+            } else {
+                // For demonstration, using 'U' for user - in real app, use actual initials
+                document.getElementById('userAccount').textContent = 'U';
+            }
+            
+            // Set up filter buttons
+            setupFilterButtons();
+            
+            // Set up search functionality
+            setupSearch();
+        });
+        
+        // Set up filter buttons
+        function setupFilterButtons() {
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // Remove active class from all buttons
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    // In a real app, you would filter the articles here
+                    alert(`Filtering by: ${this.textContent}`);
+                });
+            });
+        }
+        
+        // Set up search functionality
+        function setupSearch() {
+            const searchInput = document.querySelector('.search-input');
+            const searchBtn = document.querySelector('.search-btn');
+            
+            searchBtn.addEventListener('click', function() {
+                performSearch(searchInput.value);
+            });
+            
+            searchInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    performSearch(searchInput.value);
+                }
+            });
+        }
+        
+        function performSearch(query) {
+            if (query.trim() !== '') {
+                alert(`Searching for: ${query}`);
+                // In a real app, you would filter articles based on the search query
+            }
+        }
+        
+        // Function to open article in new tab
+        function openArticle(url) {
+            window.open(url, '_blank');
+        }
+        
+        // Function to navigate to different screens
+        function navigateTo(screen) {
+            window.location.href = screen;
+        }
+        
+        // Function to handle exit app - Modified to go to Welcome Screen
+        function exitApp() {
+            if(confirm('Are you sure you want to exit to the welcome screen?')) {
+                window.location.href = 'WelcomeScreen.html';
+            }
+        }
+    </script>
+</body>
+</html>

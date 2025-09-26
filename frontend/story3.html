@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Breaking the Cycle - SafeSpace</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', 'Segoe UI', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f9f7ff 0%, #eef2f7 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(to right, #6A11CB 0%, #2575FC 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: white;
+            font-size: 1.2rem;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .story-title {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+        
+        .story-meta {
+            font-style: italic;
+            opacity: 0.9;
+        }
+        
+        .story-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+        }
+        
+        .story-content {
+            padding: 40px;
+        }
+        
+        .story-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 25px;
+        }
+        
+        .support-resources {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+            margin-top: 30px;
+        }
+        
+        .resources-title {
+            color: #6A11CB;
+            margin-bottom: 15px;
+        }
+        
+        .resources-list {
+            list-style-type: none;
+        }
+        
+        .resources-list li {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .story-title {
+                font-size: 1.8rem;
+            }
+            
+            .story-content {
+                padding: 25px;
+            }
+            
+            .story-image {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <a href="SurvivorStories.html" class="back-button">
+                <i class="fas fa-arrow-left"></i> Back to Stories
+            </a>
+            <h1 class="story-title">Breaking the Cycle</h1>
+            <p class="story-meta">Shared by Amina, 29 • Survivor of forced marriage and honor-based violence</p>
+        </div>
+        
+        <img src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80" alt="Survivor portrait" class="story-image">
+        
+        <div class="story-content">
+            <p class="story-text">
+                In my community, women's choices were never their own. At 19, my family arranged my marriage to a man twice my age. I was told it was for my protection and our family's honor, but I soon discovered it was a prison sentence disguised as tradition.
+            </p>
+            
+            <p class="story-text">
+                For years, I endured emotional abuse and control under the guise of cultural norms. I wasn't allowed to pursue education, have friends, or even choose what to wear. When I expressed my desire to study nursing, I was told I was bringing shame to the family by being "too ambitious."
+            </p>
+            
+            <p class="story-text">
+                The turning point came when my younger sister turned 17, and my family began arranging her marriage. Seeing history repeat itself gave me courage I didn't know I had. I reached out to a university professor I had secretly been in contact with, who connected me with an organization that helps women in forced marriages.
+            </p>
+            
+            <p class="story-text">
+                Leaving was the most difficult decision of my life. I knew I would lose my family and community, but I couldn't bear to see my sister suffer the same fate. With the help of advocates, I found safe housing and legal support to nullify my marriage.
+            </p>
+            
+            <p class="story-text">
+                Today, I'm a registered nurse and advocate for women's rights in traditional communities. My sister is now in university studying law, and we've built a new chosen family of supportive friends and mentors.
+            </p>
+            
+            <p class="story-text">
+                Culture should never be a weapon used against women. True honor lies in respecting individual dignity and choice. To anyone facing similar circumstances: Your dreams matter, your voice matters, and there are people who can help you find safety while respecting your cultural identity.
+            </p>
+            
+            <div class="support-resources">
+                <h3 class="resources-title">Support Resources</h3>
+                <ul class="resources-list">
+                    <li><i class="fas fa-phone-alt"></i> Forced Marriage Helpline: 1-800-HELP-NOW</li>
+                    <li><i class="fas fa-globe"></i> Tahirih Justice Center: Protection for immigrant women and girls</li>
+                    <li><i class="fas fa-hands-helping"></i> Honor Network Helpline: Support for honor-based abuse</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>If you or someone you know needs help, please reach out. You deserve support and safety.</p>
+        </div>
+    </div>
+</body>
+</html>

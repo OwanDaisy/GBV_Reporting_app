@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SafeSpace - Survivor Stories</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', 'Segoe UI', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f9f7ff 0%, #eef2f7 100%);
+            color: #333;
+            min-height: 100vh;
+            padding: 20px;
+            padding-bottom: 100px; /* Space for footer */
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        /* Header Styles */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            margin-bottom: 20px;
+        }
+        
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo-small {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, #6A11CB 0%, #2575FC 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+        }
+        
+        .screen-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #2d3748;
+        }
+        
+        .user-account {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, #4ECDC4 0%, #556270 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Banner Section */
+        .banner {
+            background: linear-gradient(to right, #6A11CB 0%, #2575FC 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .banner h2 {
+            font-size: 1.4rem;
+            font-weight: 500;
+            line-height: 1.6;
+            font-style: italic;
+        }
+        
+        /* Stories Grid */
+        .stories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .story-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .story-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .story-image {
+            height: 180px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .story-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .story-card:hover .story-image img {
+            transform: scale(1.05);
+        }
+        
+        .story-content {
+            padding: 20px;
+        }
+        
+        .story-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #2d3748;
+        }
+        
+        .story-excerpt {
+            font-size: 0.95rem;
+            color: #718096;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        .read-more {
+            color: #6A11CB;
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        /* Show More Button */
+        .show-more-container {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .show-more-btn {
+            padding: 15px 30px;
+            background: linear-gradient(to right, #6A11CB, #2575FC);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .show-more-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Share Button */
+        .share-btn-container {
+            position: fixed;
+            bottom: 90px;
+            left: 20px;
+            z-index: 10;
+        }
+        
+        .share-btn {
+            padding: 15px 25px;
+            background: linear-gradient(to right, #FF6B6B, #FF8E53);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .share-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 15px;
+            display: flex;
+            justify-content: space-around;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #718096;
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+        
+        .nav-item.active {
+            color: #6a11cb;
+        }
+        
+        .nav-item i {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+        
+        /* Story Form Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 100;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background: white;
+            color: #333;
+            width: 90%;
+            max-width: 600px;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            color: #888;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .form-title {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #6A11CB;
+            font-size: 1.8rem;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #444;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        .form-control:focus {
+            border-color: #6A11CB;
+            outline: none;
+        }
+        
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .file-upload {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+        
+        .file-upload-input {
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+        
+        .file-upload-label {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 30px;
+            border: 2px dashed #6A11CB;
+            border-radius: 8px;
+            background-color: #f9f7ff;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .file-upload-label:hover {
+            background-color: #eef2f7;
+        }
+        
+        .file-upload-icon {
+            font-size: 2rem;
+            color: #6A11CB;
+            margin-bottom: 10px;
+        }
+        
+        .file-upload-text {
+            color: #6A11CB;
+            font-weight: 500;
+        }
+        
+        .file-preview {
+            margin-top: 15px;
+            text-align: center;
+            display: none;
+        }
+        
+        .file-preview img {
+            max-width: 100%;
+            max-height: 200px;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+        
+        .submit-btn {
+            background: linear-gradient(to right, #6A11CB, #2575FC);
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .submit-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        /* Notification Styles */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 20px;
+            border-radius: 8px;
+            color: white;
+            font-weight: 500;
+            z-index: 1000;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .notification.show {
+            transform: translateX(0);
+        }
+        
+        .notification.success {
+            background: linear-gradient(to right, #4cd964, #2ecc71);
+        }
+        
+        .notification.error {
+            background: linear-gradient(to right, #ff6b6b, #ff4d4d);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .stories-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 20px;
+            }
+            
+            .banner h2 {
+                font-size: 1.2rem;
+            }
+            
+            .screen-title {
+                font-size: 1.5rem;
+            }
+            
+            .header {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+            
+            .logo-section {
+                justify-content: center;
+            }
+            
+            .modal-content {
+                padding: 20px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .stories-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .banner {
+                padding: 20px 15px;
+            }
+            
+            .banner h2 {
+                font-size: 1.1rem;
+            }
+            
+            .story-image {
+                height: 160px;
+            }
+            
+            .share-btn {
+                padding: 12px 20px;
+                font-size: 0.9rem;
+            }
+            
+            .show-more-btn {
+                padding: 12px 25px;
+                font-size: 0.9rem;
+            }
+            
+            .modal-content {
+                width: 95%;
+                padding: 15px;
+            }
+            
+            .form-title {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <div class="header">
+            <div class="logo-section">
+                <div class="logo-small">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <div class="screen-title">Survivor Stories</div>
+            </div>
+            <div class="user-account" id="userAccount">
+                G
+            </div>
+        </div>
+        
+        <!-- Banner Section -->
+        <div class="banner">
+            <h2>"Stories are the threads that connect us, but testimonies are the proof that those threads are real and lived"</h2>
+        </div>
+        
+        <!-- Stories Grid -->
+        <div class="stories-grid" id="storiesGrid">
+            <!-- Story 1 -->
+            <div class="story-card" onclick="navigateTo('story1.html')">
+                <div class="story-image">
+                    <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80" alt="Survivor Story">
+                </div>
+                <div class="story-content">
+                    <h3 class="story-title">Finding My Voice Again</h3>
+                    <p class="story-excerpt">After years of silence, I found the courage to speak up and reclaim my life. This is my journey of healing and empowerment.</p>
+                    <div class="read-more">
+                        <span>Read More</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Story 2 -->
+            <div class="story-card" onclick="navigateTo('story2.html')">
+                <div class="story-image">
+                    <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80" alt="Survivor Story">
+                </div>
+                <div class="story-content">
+                    <h3 class="story-title">From Victim to Victor</h3>
+                    <p class="story-excerpt">My journey from being a victim of domestic violence to becoming a advocate for change and helping others find their strength.</p>
+                    <div class="read-more">
+                        <span>Read More</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Story 3 -->
+            <div class="story-card" onclick="navigateTo('story3.html')">
+                <div class="story-image">
+                    <img src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80" alt="Survivor Story">
+                </div>
+                <div class="story-content">
+                    <h3 class="story-title">Breaking the Cycle</h3>
+                    <p class="story-excerpt">How I broke free from generational patterns of abuse and created a new legacy of strength and resilience for my children.</p>
+                    <div class="read-more">
+                        <span>Read More</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Story 4 -->
+            <div class="story-card" onclick="navigateTo('story4.html')">
+                <div class="story-image">
+                    <img src="https://images.unsplash.com/photo-1516585427167-9f4af9627e6c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80" alt="Survivor Story">
+                </div>
+                <div class="story-content">
+                    <h3 class="story-title">Healing Together</h3>
+                    <p class="story-excerpt">The power of community support in my recovery journey and how connecting with other survivors helped me heal.</p>
+                    <div class="read-more">
+                        <span>Read More</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Story 5 -->
+            <div class="story-card" onclick="navigateTo('story5.html')">
+                <div class="story-image">
+                    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80" alt="Survivor Story">
+                </div>
+                <div class="story-content">
+                    <h3 class="story-title">Reclaiming My Power</h3>
+                    <p class="story-excerpt">After experiencing workplace harassment, I found the strength to speak up and create change for myself and others.</p>
+                    <div class="read-more">
+                        <span>Read More</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Initially hidden stories -->
+            <div class="story-card hidden-story" onclick="navigateTo('story6.html')">
+                <div class="story-image">
+                    <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80" alt="Survivor Story">
+                </div>
+                <div class="story-content">
+                    <h3 class="story-title">A New Beginning</h3>
+                    <p class="story-excerpt">Leaving everything behind to start anew - my story of courage, resilience, and finding hope after trauma.</p>
+                    <div class="read-more">
+                        <span>Read More</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="story-card hidden-story" onclick="navigateTo('story7.html')">
+                <div class="story-image">
+                    <img src="https://images.unsplash.com/photo-1519457431-44ccd64a579b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80" alt="Survivor Story">
+                </div>
+                <div class="story-content">
+                    <h3 class="story-title">The Strength in Vulnerability</h3>
+                    <p class="story-excerpt">How embracing my vulnerability became my greatest strength in overcoming abuse and rebuilding my life.</p>
+                    <div class="read-more">
+                        <span>Read More</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="story-card hidden-story" onclick="navigateTo('story8.html')">
+                <div class="story-image">
+                    <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80" alt="Survivor Story">
+                </div>
+                <div class="story-content">
+                    <h3 class="story-title">Rising from the Ashes</h3>
+                    <p class="story-excerpt">My journey of transformation from a broken spirit to a empowered survivor helping others find their voice.</p>
+                    <div class="read-more">
+                        <span>Read More</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Show More Button -->
+        <div class="show-more-container">
+            <button class="show-more-btn" id="showMoreBtn">
+                <i class="fas fa-chevron-down"></i> Show More Stories
+            </button>
+        </div>
+    </div>
+    
+    <!-- Share Button -->
+    <div class="share-btn-container">
+        <button class="share-btn" id="shareStoryBtn">
+            <i class="fas fa-plus"></i> Share Your Story
+        </button>
+    </div>
+    
+    <!-- Story Submission Modal -->
+    <div class="modal" id="storyModal">
+        <div class="modal-content">
+            <button class="close-btn" id="closeModal">&times;</button>
+            <h2 class="form-title">Share Your Story</h2>
+            <form id="storyForm">
+                <div class="form-group">
+                    <label for="storyTitle">Story Title</label>
+                    <input type="text" class="form-control" id="storyTitle" placeholder="Enter a title for your story" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="storyContent">Your Story</label>
+                    <textarea class="form-control" id="storyContent" placeholder="Share your experience, strength, and hope..." required></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="storyImage">Story Image (Optional)</label>
+                    <div class="file-upload">
+                        <input type="file" id="storyImage" class="file-upload-input" accept="image/*">
+                        <label for="storyImage" class="file-upload-label">
+                            <i class="fas fa-cloud-upload-alt file-upload-icon"></i>
+                            <span class="file-upload-text">Click to upload an image</span>
+                            <span>or drag and drop</span>
+                        </label>
+                    </div>
+                    <div class="file-preview" id="filePreview">
+                        <span>Image Preview:</span>
+                        <img id="previewImage" src="#" alt="Preview">
+                    </div>
+                </div>
+                
+                <div class="form-group checkbox-group">
+                    <input type="checkbox" id="anonymous" class="form-control">
+                    <label for="anonymous">Share anonymously</label>
+                </div>
+                
+                <button type="submit" class="submit-btn" id="submitBtn">
+                    <i class="fas fa-paper-plane"></i> Share Your Story
+                </button>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Notification -->
+    <div class="notification" id="notification"></div>
+    
+    <!-- Bottom Navigation -->
+    <div class="bottom-nav">
+        <div class="nav-item" onclick="navigateTo('HomeScreen.html')">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+        </div>
+        <div class="nav-item" onclick="navigateTo('Articles.html')">
+            <i class="fas fa-newspaper"></i>
+            <span>Articles</span>
+        </div>
+        <div class="nav-item active">
+            <i class="fas fa-book-open"></i>
+            <span>Stories</span>
+        </div>
+        <div class="nav-item" onclick="navigateTo('Statistics.html')">
+            <i class="fas fa-chart-bar"></i>
+            <span>Statistics</span>
+        </div>
+        <div class="nav-item" onclick="navigateTo('Join.html')">
+            <i class="fas fa-hands-helping"></i>
+            <span>Join NGO</span>
+        </div>
+        <div class="nav-item" onclick="exitApp()">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>Exit</span>
+        </div>
+    </div>
+
+    <script>
+        // DOM Elements
+        const shareStoryBtn = document.getElementById('shareStoryBtn');
+        const storyModal = document.getElementById('storyModal');
+        const closeModal = document.getElementById('closeModal');
+        const storyForm = document.getElementById('storyForm');
+        const notification = document.getElementById('notification');
+        const fileInput = document.getElementById('storyImage');
+        const filePreview = document.getElementById('filePreview');
+        const previewImage = document.getElementById('previewImage');
+        const submitBtn = document.getElementById('submitBtn');
+
+        // API Base URL - Update this to match your backend URL
+        const API_BASE_URL = 'http://localhost:5000/api';
+
+        // Set user initial based on whether they're a guest or logged in
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if user is logged in or guest (this would normally come from your auth system)
+            const urlParams = new URLSearchParams(window.location.search);
+            const userType = urlParams.get('user') || 'guest';
+            
+            if (userType === 'guest') {
+                document.getElementById('userAccount').textContent = 'G';
+            } else {
+                // For demonstration, using 'U' for user - in real app, use actual initials
+                document.getElementById('userAccount').textContent = 'U';
+            }
+            
+            // Set up show more functionality
+            setupShowMore();
+            
+            // Set up file upload preview
+            setupFilePreview();
+        });
+        
+        // Set up show more functionality
+        function setupShowMore() {
+            const showMoreBtn = document.getElementById('showMoreBtn');
+            const hiddenStories = document.querySelectorAll('.hidden-story');
+            let storiesVisible = false;
+            
+            showMoreBtn.addEventListener('click', function() {
+                hiddenStories.forEach(story => {
+                    if (storiesVisible) {
+                        story.style.display = 'none';
+                    } else {
+                        story.style.display = 'block';
+                    }
+                });
+                
+                storiesVisible = !storiesVisible;
+                
+                if (storiesVisible) {
+                    showMoreBtn.innerHTML = '<i class="fas fa-chevron-up"></i> Show Less';
+                } else {
+                    showMoreBtn.innerHTML = '<i class="fas fa-chevron-down"></i> Show More Stories';
+                }
+            });
+        }
+        
+        // Set up file upload preview
+        function setupFilePreview() {
+            fileInput.addEventListener('change', function() {
+                const file = this.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    
+                    reader.addEventListener('load', function() {
+                        previewImage.src = reader.result;
+                        filePreview.style.display = 'block';
+                    });
+                    
+                    reader.readAsDataURL(file);
+                } else {
+                    filePreview.style.display = 'none';
+                }
+            });
+        }
+        
+        // Open story modal
+        shareStoryBtn.addEventListener('click', function() {
+            storyModal.style.display = 'flex';
+        });
+        
+        // Close modal
+        closeModal.addEventListener('click', function() {
+            storyModal.style.display = 'none';
+        });
+        
+        // Close modal when clicking outside
+        window.addEventListener('click', function(event) {
+            if (event.target === storyModal) {
+                storyModal.style.display = 'none';
+            }
+        });
+        
+        // Form submission
+        storyForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData();
+            formData.append('title', document.getElementById('storyTitle').value);
+            formData.append('content', document.getElementById('storyContent').value);
+            formData.append('anonymous', document.getElementById('anonymous').checked);
+            
+            // Add image if selected
+            const imageFile = fileInput.files[0];
+            if (imageFile) {
+                formData.append('image', imageFile);
+            }
+            
+            // Validate form
+            if (!formData.get('title') || !formData.get('content')) {
+                showNotification('Please fill in all required fields', 'error');
+                return;
+            }
+            
+            // Disable submit button
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sharing...';
+            
+            try {
+                // Require login before sharing a story
+                const token = localStorage.getItem('token');
+                const user = JSON.parse(localStorage.getItem('user') || '{}');
+                if (!token || !user.id) {
+                    showNotification('You must be logged in to share your story.', 'error');
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Share Your Story';
+                    return;
+                }
+                // Add user ID
+                formData.append('user_id', user.id);
+                // Send data to backend
+                const response = await fetch(`${API_BASE_URL}/stories`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: formData
+                });
+                const data = await response.json();
+                if (response.ok) {
+                    showNotification('Your story has been shared successfully!', 'success');
+                    storyForm.reset();
+                    filePreview.style.display = 'none';
+                    setTimeout(() => {
+                        storyModal.style.display = 'none';
+                    }, 2000);
+                } else {
+                    throw new Error(data.message || 'Failed to share story');
+                }
+            } catch (error) {
+                console.error('Error sharing story:', error);
+                showNotification(error.message || 'Failed to share your story. Please try again.', 'error');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Share Your Story';
+            }
+        });
+        
+        // Function to show notification
+        function showNotification(message, type) {
+            notification.textContent = message;
+            notification.className = `notification ${type} show`;
+            
+            // Hide notification after 5 seconds
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 5000);
+        }
+        
+        // Function to navigate to different screens
+        function navigateTo(screen) {
+            window.location.href = screen;
+        }
+        
+        // Function to handle exit app
+        function exitApp() {
+            if(confirm('Are you sure you want to exit the app?')) {
+                alert('Exiting the app...');
+                // In a real app, this would close the app or navigate to a goodbye screen
+            }
+        }
+    </script>
+</body>
+</html>
